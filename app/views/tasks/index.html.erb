@@ -1,25 +1,20 @@
-<h1>Listing tasks</h1>
+<% content_for :aside do%>
+	<h2>Last 5 Completed Tasks</h2>
+	<% @completed_tasks.each do |completed_task| %>
+	<p><%= completed_task.name %></p>
+	<% end %>
+	<p>Archive</p>
+<% end %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Complete</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Todo List</h1>
 
 <% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.name %></td>
-    <td><%= task.complete %></td>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  
+    <p><%= task.name %>: 
+    <%= task.complete %></p>
+    <p><%= link_to 'Show', task %> | 
+    <%= link_to 'Edit', edit_task_path(task) %> | 
+    <%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></p>
+  
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Task', new_task_path %>
+<p><%= link_to 'New Task', new_task_path %></p>

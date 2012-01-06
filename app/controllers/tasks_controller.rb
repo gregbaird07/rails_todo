@@ -2,11 +2,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
-
+    @tasks = Task.where(:complete => false)
+	@completed_tasks = Task.where(:complete => true).limit(5).order("updated_at DESC")
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @tasks }
+      format.json { render :json => {:tasks => @tasks,
+									 :completed_tasks => @completed_tasks }}
     end
   end
 
